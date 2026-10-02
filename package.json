@@ -1,0 +1,137 @@
+{
+  "name": "make-runner",
+  "displayName": "Make Runner",
+  "description": "Run Makefile targets and workspace commands from a configurable list via the Command Palette, CodeLens and status bar.",
+  "version": "0.1.0",
+  "publisher": "samarin-aa-aka-rtm00",
+  "license": "MIT",
+  "preview": true,
+  "pricing": "Free",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0d3d8f",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rtmo0/vscode-make-runner.git"
+  },
+  "homepage": "https://github.com/rtmo0/vscode-make-runner#readme",
+  "bugs": {
+    "url": "https://github.com/rtmo0/vscode-make-runner/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "make-runner",
+    "make",
+    "makefile",
+    "gnu-make",
+    "commands",
+    "terminal",
+    "scripts",
+    "tasks",
+    "codelens",
+    "build"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Make Runner executes configured shell commands and therefore requires a trusted workspace."
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onLanguage:makefile",
+    "onCommand:make-runner.runCommand",
+    "onCommand:make-runner.configure"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "make-runner.runCommand",
+        "title": "Run Command…",
+        "category": "Make Runner",
+        "icon": "$(play)"
+      },
+      {
+        "command": "make-runner.configure",
+        "title": "Configure Commands",
+        "category": "Make Runner",
+        "icon": "$(gear)"
+      }
+    ],
+    "configuration": {
+      "title": "Make Runner",
+      "properties": {
+        "make-runner.commands": {
+          "type": "array",
+          "default": [],
+          "scope": "resource",
+          "description": "Commands shown by Make Runner. Commands execute in an integrated terminal.",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "command"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Name shown in Make Runner."
+              },
+              "command": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Shell command to execute. Supports ${workspaceFolder}."
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Working directory. Supports ${workspaceFolder}; defaults to the workspace folder."
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional description shown in Make Runner."
+              }
+            }
+          }
+        },
+        "make-runner.reuseTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Reuse the Make Runner terminal between command executions."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run check && npm run build",
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "compile": "tsc -p ./ --noEmit",
+    "typecheck": "tsc -p ./ --noEmit",
+    "check": "npm run typecheck",
+    "package": "vsce package --no-dependencies",
+    "package:list": "vsce ls --no-dependencies",
+    "lint": "tsc -p ./ --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.6.0"
+  }
+}

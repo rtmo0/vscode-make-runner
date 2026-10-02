@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f6feb"/>
+      <stop offset="1" stop-color="#0d3d8f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded background -->
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+
+  <!-- Terminal window -->
+  <rect x="36" y="36" width="184" height="148" rx="16" fill="#0d1117"/>
+  <rect x="36" y="36" width="184" height="32" rx="16" fill="#161b22"/>
+  <rect x="36" y="52" width="184" height="16" fill="#161b22"/>
+
+  <!-- Window controls -->
+  <circle cx="58" cy="52" r="7" fill="#f85149"/>
+  <circle cx="78" cy="52" r="7" fill="#f0883e"/>
+  <circle cx="98" cy="52" r="7" fill="#3fb950"/>
+
+  <!-- Command line -->
+  <rect x="54" y="108" width="124" height="24" rx="7" fill="#21262d"/>
+  <text x="66" y="125" font-family="Menlo, Consolas, monospace" font-size="17" fill="#e6edf3">make build</text>
+  <rect x="174" y="118" width="2" height="14" fill="#e6edf3"/>
+
+  <!-- Green run arrow -->
+  <circle cx="194" cy="160" r="40" fill="#2ea043"/>
+  <path d="M181 138 L215 160 L181 182 Z" fill="#ffffff"/>
+</svg>
