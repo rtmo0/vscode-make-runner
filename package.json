@@ -1,6 +1,6 @@
 {
-  "name": "make-runner",
-  "displayName": "Make Runner",
+  "name": "makefile-target-launcher",
+  "displayName": "Makefile Target Launcher",
   "description": "Run Makefile targets and workspace commands from a configurable list via the Command Palette, CodeLens and status bar.",
   "version": "0.1.0",
   "publisher": "samarin-aa-aka-rtm00",
@@ -27,7 +27,7 @@
     "Other"
   ],
   "keywords": [
-    "make-runner",
+    "makefile-target-launcher",
     "make",
     "makefile",
     "gnu-make",
@@ -45,7 +45,7 @@
   "capabilities": {
     "untrustedWorkspaces": {
       "supported": false,
-      "description": "Make Runner executes configured shell commands and therefore requires a trusted workspace."
+      "description": "Makefile Target Launcher executes configured shell commands and therefore requires a trusted workspace."
     },
     "virtualWorkspaces": {
       "supported": true
@@ -53,32 +53,32 @@
   },
   "activationEvents": [
     "onLanguage:makefile",
-    "onCommand:make-runner.runCommand",
-    "onCommand:make-runner.configure"
+    "onCommand:makefile-target-launcher.runCommand",
+    "onCommand:makefile-target-launcher.configure"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "make-runner.runCommand",
+        "command": "makefile-target-launcher.runCommand",
         "title": "Run Command…",
-        "category": "Make Runner",
+        "category": "Makefile Target Launcher",
         "icon": "$(play)"
       },
       {
-        "command": "make-runner.configure",
+        "command": "makefile-target-launcher.configure",
         "title": "Configure Commands",
-        "category": "Make Runner",
+        "category": "Makefile Target Launcher",
         "icon": "$(gear)"
       }
     ],
     "configuration": {
-      "title": "Make Runner",
+      "title": "Makefile Target Launcher",
       "properties": {
-        "make-runner.commands": {
+        "makefile-target-launcher.commands": {
           "type": "array",
           "default": [],
           "scope": "resource",
-          "description": "Commands shown by Make Runner. Commands execute in an integrated terminal.",
+          "description": "Commands shown by Makefile Target Launcher. Commands execute in an integrated terminal.",
           "items": {
             "type": "object",
             "required": [
@@ -90,7 +90,7 @@
               "label": {
                 "type": "string",
                 "minLength": 1,
-                "description": "Name shown in Make Runner."
+                "description": "Name shown in Makefile Target Launcher."
               },
               "command": {
                 "type": "string",
@@ -103,15 +103,15 @@
               },
               "description": {
                 "type": "string",
-                "description": "Optional description shown in Make Runner."
+                "description": "Optional description shown in Makefile Target Launcher."
               }
             }
           }
         },
-        "make-runner.reuseTerminal": {
+        "makefile-target-launcher.reuseTerminal": {
           "type": "boolean",
           "default": true,
-          "description": "Reuse the Make Runner terminal between command executions."
+          "description": "Reuse the Makefile Target Launcher terminal between command executions."
         }
       }
     }

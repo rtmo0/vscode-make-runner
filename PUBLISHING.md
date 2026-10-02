@@ -27,7 +27,7 @@ The release workflow:
 ## Publish to the VS Code Marketplace manually
 
 1. Open the GitHub Release for the version being published.
-2. Download `make-runner-<version>.vsix`.
+2. Download `makefile-target-launcher-<version>.vsix`.
 3. Open the Visual Studio Marketplace publisher management page.
 4. Select publisher `samarin-aa-aka-rtm00`.
 5. Select **New extension → Visual Studio Code** and upload the VSIX.

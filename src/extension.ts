@@ -28,7 +28,7 @@ class MakeCodeLensProvider implements vscode.CodeLensProvider {
     return getMakeTargets(document).map((target) => {
       const lens = new vscode.CodeLens(target.range);
       lens.command = {
-        command: 'make-runner.runMakeTarget',
+        command: 'makefile-target-launcher.runMakeTarget',
         title: `$(play) Run ${target.name}`,
         arguments: [{ name: target.name, dir: target.dir }]
       };
@@ -39,9 +39,9 @@ class MakeCodeLensProvider implements vscode.CodeLensProvider {
 
 export function activate(context: vscode.ExtensionContext): void {
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  statusBarItem.name = 'Make Runner';
-  statusBarItem.command = 'make-runner.runCommand';
-  statusBarItem.tooltip = 'Run a Make Runner command';
+  statusBarItem.name = 'Makefile Target Launcher';
+  statusBarItem.command = 'makefile-target-launcher.runCommand';
+  statusBarItem.tooltip = 'Run a Makefile Target Launcher command';
   statusBarItem.show();
   updateStatusBar();
 
@@ -51,25 +51,25 @@ export function activate(context: vscode.ExtensionContext): void {
       { language: MAKEFILE_LANGUAGE, scheme: 'file' },
       new MakeCodeLensProvider()
     ),
-    vscode.commands.registerCommand('make-runner.runMakeTarget', (target?: MakeTarget) => {
+    vscode.commands.registerCommand('makefile-target-launcher.runMakeTarget', (target?: MakeTarget) => {
       if (target) {
         runMakeTarget(target);
       }
     }),
-    vscode.commands.registerCommand('make-runner.configure', () =>
-      vscode.commands.executeCommand('workbench.action.openSettings', 'make-runner.commands')
+    vscode.commands.registerCommand('makefile-target-launcher.configure', () =>
+      vscode.commands.executeCommand('workbench.action.openSettings', 'makefile-target-launcher.commands')
     ),
-    vscode.commands.registerCommand('make-runner.runCommand', async (command?: RunnerCommand) => {
+    vscode.commands.registerCommand('makefile-target-launcher.runCommand', async (command?: RunnerCommand) => {
       const selected = command ?? await pickCommand();
       if (selected) {
         runInTerminal(selected);
       }
     }),
     vscode.workspace.onDidChangeConfiguration((event) => {
-      if (event.affectsConfiguration('make-runner.commands')) {
+      if (event.affectsConfiguration('makefile-target-launcher.commands')) {
         updateStatusBar();
       }
-      if (event.affectsConfiguration('make-runner.reuseTerminal') && !shouldReuseTerminal()) {
+      if (event.affectsConfiguration('makefile-target-launcher.reuseTerminal') && !shouldReuseTerminal()) {
         sharedTerminal = undefined;
       }
     }),
@@ -137,16 +137,16 @@ function updateStatusBar(): void {
   }
   const count = getCommands().length;
   if (count === 0) {
-    statusBarItem.text = '$(terminal) Make Runner';
-    statusBarItem.tooltip = 'No Make Runner commands configured. Click to configure.';
+    statusBarItem.text = '$(terminal) Makefile Target Launcher';
+    statusBarItem.tooltip = 'No Makefile Target Launcher commands configured. Click to configure.';
   } else {
-    statusBarItem.text = `$(terminal) Make Runner (${count})`;
-    statusBarItem.tooltip = `Run one of ${count} Make Runner command(s)`;
+    statusBarItem.text = `$(terminal) Makefile Target Launcher (${count})`;
+    statusBarItem.tooltip = `Run one of ${count} Makefile Target Launcher command(s)`;
   }
 }
 
 function getCommands(): RunnerCommand[] {
-  const configured = vscode.workspace.getConfiguration('make-runner').get<RunnerCommand[]>('commands', []);
+  const configured = vscode.workspace.getConfiguration('makefile-target-launcher').get<RunnerCommand[]>('commands', []);
   return configured.filter((item) =>
     typeof item?.label === 'string' && item.label.trim().length > 0 &&
     typeof item.command === 'string' && item.command.trim().length > 0
@@ -157,11 +157,11 @@ async function pickCommand(): Promise<RunnerCommand | undefined> {
   const commands = getCommands();
   if (commands.length === 0) {
     const action = await vscode.window.showInformationMessage(
-      'No Make Runner commands are configured.',
+      'No Makefile Target Launcher commands are configured.',
       'Configure'
     );
     if (action === 'Configure') {
-      await vscode.commands.executeCommand('make-runner.configure');
+      await vscode.commands.executeCommand('makefile-target-launcher.configure');
     }
     return undefined;
   }
@@ -201,13 +201,13 @@ function resolveVariables(value: string | undefined, folder: vscode.WorkspaceFol
 
 function getTerminal(label: string, cwd: string | undefined): vscode.Terminal {
   if (shouldReuseTerminal()) {
-    sharedTerminal ??= vscode.window.createTerminal({ name: 'Make Runner', cwd });
+    sharedTerminal ??= vscode.window.createTerminal({ name: 'Makefile Target Launcher', cwd });
     return sharedTerminal;
   }
 
-  return vscode.window.createTerminal({ name: `Make Runner: ${label}`, cwd });
+  return vscode.window.createTerminal({ name: `Makefile Target Launcher: ${label}`, cwd });
 }
 
 function shouldReuseTerminal(): boolean {
-  return vscode.workspace.getConfiguration('make-runner').get<boolean>('reuseTerminal', true);
+  return vscode.workspace.getConfiguration('makefile-target-launcher').get<boolean>('reuseTerminal', true);
 }
