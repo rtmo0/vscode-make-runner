@@ -1,5 +1,7 @@
 # Makefile Target Launcher
 
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/rtmo0)
+
 <img src="media/icon.png" alt="Makefile Target Launcher icon" width="128" align="right" />
 
 Makefile Target Launcher is a small VS Code extension for keeping frequently used workspace commands in one place and launching them in the integrated terminal. It also adds a clickable **Run** action next to every Makefile target.
@@ -39,6 +41,10 @@ Each command supports:
 Run a command from the **Command Palette** (**Makefile Target Launcher: Run Command…**) or by clicking the **Makefile Target Launcher** entry in the status bar. Use **Makefile Target Launcher: Configure Commands** to open the settings.
 
 In any `Makefile`, a green **Run** action appears next to every target — click it to execute `make <target>` in the integrated terminal.
+
+## Support
+
+Makefile Target Launcher is free and open source. If it saves you time, you can support its development on [Buy Me a Coffee](https://buymeacoffee.com/rtmo0). Bug reports and pull requests are just as welcome.
 
 ## Development
 

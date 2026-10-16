@@ -2,7 +2,7 @@
   "name": "makefile-target-launcher",
   "displayName": "Makefile Target Launcher",
   "description": "Run Makefile targets and workspace commands from a configurable list via the Command Palette, CodeLens and status bar.",
-  "version": "0.1.0",
+  "version": "1.3.0",
   "publisher": "samarin-aa-aka-rtm00",
   "license": "MIT",
   "preview": true,
@@ -19,6 +19,9 @@
   "homepage": "https://github.com/rtmo0/vscode-make-runner#readme",
   "bugs": {
     "url": "https://github.com/rtmo0/vscode-make-runner/issues"
+  },
+  "sponsor": {
+    "url": "https://buymeacoffee.com/rtmo0"
   },
   "engines": {
     "vscode": "^1.85.0"
