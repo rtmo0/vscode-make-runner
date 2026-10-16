@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+- The **Sponsor** button and README support link now point to Boosty instead of Buy Me a Coffee.
+
 ## 1.3.0
 
 - Added a **Sponsor** button (Buy Me a Coffee) to the extension page in VS Code and the Marketplace, and a Support section to the README.
